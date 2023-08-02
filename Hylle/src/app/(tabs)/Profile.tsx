@@ -1,11 +1,12 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-
-export function MainFeed(){
+export default function Profile(){
     return(
         <View>
-            <Text>This is the feed</Text>
+            <Text>
+                bla
+            </Text>
         </View>
-    );
+    )
 }
