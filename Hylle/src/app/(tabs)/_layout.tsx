@@ -1,4 +1,3 @@
-import React from "react";
 import { Tabs } from "expo-router";
 
 export default function TabRoutesLayout() {
@@ -11,12 +10,23 @@ export default function TabRoutesLayout() {
         }}
       />
       <Tabs.Screen
-        name="Profile"
+        name="Shelves"
         options={{
-          title: "Profile",
+          title: "Shelves",
         }}
       />
-
+      <Tabs.Screen
+        name="Search"
+        options={{
+          title: "Search",
+        }}
+      />
+        <Tabs.Screen
+          name="Profile"
+          options={{
+            title: "Profile",
+          }}
+        />
     </Tabs>
   )
 }

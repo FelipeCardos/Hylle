@@ -4,10 +4,22 @@
     "web": {
       "bundler": "metro"
     },
+    "experiments": {
+      "typedRoutes": true,
+      "tsconfigPaths": true
+    },
     "name": "Hylle",
     "slug": "Hylle",
     "plugins": [
-      "expo-router"
-    ]
+      "expo-router",
+      ["@react-native-google-signin/google-signin"]
+    ],
+    "android": {
+      "package": "com.felipech.Hylle",
+      "googleServicesFile": "./google-services.json"
+    },
+    "ios":{
+      "supportsTablet":true
+    }
   }
 }
