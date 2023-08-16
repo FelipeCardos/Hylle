@@ -1,87 +1,74 @@
 package com.Hylle.User;
 
 import jakarta.persistence.*;
-import org.springframework.stereotype.Service;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-@Entity
-@Table
-public class User {
+import java.util.Collection;
+import java.util.List;
+
+@Table(name = "user")
+@Entity(name = "user")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
+public class User implements UserDetails {
     @Id
-    @SequenceGenerator(
-            name="user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
-    private String Email;
-    private String Username;
-    private String Password;
+    private String username;
+    private String email;
+    private String password;
+    private String status;
+    private Role role;
+    private String firstName;
+    private String lastName;
 
-    private String Status;
 
-
-    public User() {
+    public User(String username, String email , String password , String status , Role role ,String firstName, String lastName){
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.status = status;
+        this.role = role;
+        this.email = email;
     }
-
-    public User(int id, String email, String username, String password, String status) {
-        this.id = id;
-        this.Email = email;
-        Username = username;
-        Password = password;
-        Status = status;
-    }
-
-    public User(String email, String username, String password, String status) {
-        this.Email = email;
-        Username = username;
-        Password = password;
-        Status = status;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        this.Email = email;
-    }
-
-    public String getUsername() {
-        return Username;
-    }
-
-    public void setUsername(String username) {
-        Username = username;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
+    @Override
+    public String getUsername(){
+        return this.username;
     }
 
     @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + Email + '\'' +
-                ", Username='" + Username + '\'' +
-                ", Password='" + Password + '\'' +
-                ", Status='" + Status + '\'' +
-                '}';
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(this.role == Role.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
