@@ -1,4 +1,3 @@
-import { getAuthorizationHeader } from '../Services/ApiConfig';
 import React, { useEffect, useState } from 'react';
 import { View, Text, SafeAreaView, TextInput, Alert } from 'react-native';
 import * as WebBrowser from "expo-web-browser";
@@ -6,7 +5,7 @@ import * as Google from 'expo-auth-session/providers/google';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../Services/Api';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import { Link } from 'expo-router';
 WebBrowser.maybeCompleteAuthSession();
 
 export default function App() {
@@ -70,6 +69,7 @@ export default function App() {
         // Guardo informações do utilizador
         await AsyncStorage.setItem('@user', JSON.stringify(responseData.user));
 
+
         // Chamada para obter os dados do usuário
       } else {
         // Tratar erros de autenticação
@@ -104,6 +104,13 @@ export default function App() {
           Sign in with Google
         </Text>
       </TouchableOpacity>
+        <Link href={'/Register'} asChild>
+          <TouchableOpacity >
+            <Text>
+              Create Account
+            </Text>
+          </TouchableOpacity>
+        </Link>
     </SafeAreaView>
   )
 }
