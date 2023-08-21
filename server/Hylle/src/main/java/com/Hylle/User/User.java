@@ -37,7 +37,10 @@ public class User implements UserDetails {
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
-        this.role = role;
+        if(role == null)
+            this.role = Role.USER;
+        else
+            this.role = role;
         this.email = email;
     }
     @Override

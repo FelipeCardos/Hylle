@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView, TextInput, Alert } from 'react-native';
+import { Text, SafeAreaView, TextInput, Alert } from 'react-native';
 import * as WebBrowser from "expo-web-browser";
 import * as Google from 'expo-auth-session/providers/google';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../Services/Api';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Link } from 'expo-router';
+import { Link, useRouter} from 'expo-router';
 WebBrowser.maybeCompleteAuthSession();
 
 export default function App() {
@@ -17,6 +17,9 @@ export default function App() {
     androidClientId: "337910644768-v0b1opqtoitdebs9q21frlev6u4s4mr2.apps.googleusercontent.com",
     webClientId: "337910644768-64b91vfeqmtvb88auum58gi2o86rfg8k.apps.googleusercontent.com"
   });
+  useEffect(() => {
+    checkAuthenticatedUser();
+  }, []);
 
   useEffect(() => {
     handleSignInWithGoogle();
@@ -32,6 +35,16 @@ export default function App() {
       setUserInfo(JSON.parse(user));
     }
   }
+  async function checkAuthenticatedUser() {
+    const userToken = await AsyncStorage.getItem('@token');
+    const user = await AsyncStorage.getItem('@user');
+    
+    if (userToken && user) {
+      // Redirect the user to a specific route if authenticated
+      useRouter().replace('/(tabs)');
+    }
+  }
+
 
   async function getUserInfo(token: string) {
     try {
@@ -44,6 +57,7 @@ export default function App() {
       const user = await res.json();
       await AsyncStorage.setItem("@user", JSON.stringify(user));
       setUserInfo(user);
+      useRouter().replace('/(tabs)');
     } catch (error) {
       // Tratar erros de requisição
       console.error("Erro ao obter informações do usuário:", error);
@@ -68,6 +82,8 @@ export default function App() {
         await AsyncStorage.setItem('@token', JSON.stringify(responseData.token))
         // Guardo informações do utilizador
         await AsyncStorage.setItem('@user', JSON.stringify(responseData.user));
+
+      useRouter().replace('/(tabs)');
 
 
         // Chamada para obter os dados do usuário
