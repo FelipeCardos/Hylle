@@ -21,6 +21,13 @@ export default function TabRoutesLayout() {
           title: "Search",
         }}
       />
+      <Tabs.Screen
+        name="Scan"
+        options={{
+          title: "Scan",
+        }}
+      />
+
         <Tabs.Screen
           name="Profile"
           options={{
