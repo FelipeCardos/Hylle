@@ -1,5 +1,6 @@
 package com.Hylle.User;
 
+import com.Hylle.Shelf.Shelf;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -9,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,21 +19,35 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id", exclude = "shelves")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "idUser")
     private int id;
     private String username;
     private String email;
     private String password;
-    private String status;
+    private Status status;
     private Role role;
     private String firstName;
     private String lastName;
+    @OneToMany(mappedBy = "user")
+    private List<Shelf> shelves = new ArrayList<>();
+    private String profilePic;
 
+    public User(String username, String email, String password, Status status, Role role, String firstName, String lastName, String profilePic) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.status = status;
+        this.role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.profilePic = profilePic;
+    }
 
-    public User(String username, String email , String password , String status , Role role ,String firstName, String lastName){
+    public User(String username, String email , String password , Status status , Role role , String firstName, String lastName, String profilePic, List<Shelf> shelves ){
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -42,6 +58,8 @@ public class User implements UserDetails {
         else
             this.role = role;
         this.email = email;
+        this.profilePic = profilePic;
+        this.shelves = shelves;
     }
     @Override
     public String getUsername(){

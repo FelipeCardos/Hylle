@@ -1,5 +1,6 @@
 package com.Hylle.OAuth;
 
+import com.Hylle.User.Role;
 import com.Hylle.User.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +31,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/oauth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/oauth/register").permitAll()
                         .requestMatchers(HttpMethod.GET, "/oauth/user").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/books").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/books").hasRole( Role.ADMIN.getRole())
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(secutityFilter, UsernamePasswordAuthenticationFilter.class)

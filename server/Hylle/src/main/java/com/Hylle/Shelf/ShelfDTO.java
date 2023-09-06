@@ -1,2 +1,6 @@
-package com.Hylle.Shelf;public record ShelfDTO() {
+package com.Hylle.Shelf;
+
+import java.util.Date;
+
+public record ShelfDTO(String title, Date creationTime) {
 }
