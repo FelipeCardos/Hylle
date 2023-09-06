@@ -112,18 +112,10 @@ export default function App() {
                    block 
                    bg-white 
                    w-full 
-                   border 
-                   border-slate-300 
                    rounded-md 
                    py-2 
                    pl-5 
-                   pr-3 
-                   shadow-sm 
-                   focus:outline-none 
-                   focus:from-lightGold 
-                   focus:to-gold 
-                   focus:ring-1 
-                   sm:text-sm"'
+                   pr-3'
       />
       </View>
       <View className='w-3/4 my-0.5'>
@@ -136,18 +128,10 @@ export default function App() {
                    block
                   bg-white 
                    w-full 
-                   border 
-                   border-slate-300
                    rounded-md 
                    py-2 
                    pl-5 
-                   pr-3 
-                   shadow-sm 
-                   focus:outline-none 
-                   focus:from-lightGold 
-                   focus:to-gold 
-                   focus:ring-1 
-                   sm:text-sm"'
+                   pr-3'
       />
       </View>
       <View className='w-3/4 mt-3'>
@@ -155,23 +139,25 @@ export default function App() {
                         className='bg-lightGold
                                    my-05
                                    w-full
-                                   py-2
-                                   pl-3
+                                   py-3
                                    rounded-md'>
-        <Text className='text-darkBlue'>
+        <Text className='text-darkBlue
+                         text-xl
+                         text-center'>
           Sign in
         </Text>
       </TouchableOpacity>
       </View>
-      <View className='w-3/4 mt-3'>
+      <View className='w-3/4 mt-3 mb-4'>
       <TouchableOpacity onPress={() => promptAsync()} 
                         className='bg-red
                                      my-0.5
                                      w-full
-                                     py-2
-                                     pl-3
+                                     py-3
                                      rounded-md'>
-        <Text className='text-white'>
+        <Text className='text-white
+                         text-xl
+                         text-center'>
           Sign in with Google
         </Text>
       </TouchableOpacity>

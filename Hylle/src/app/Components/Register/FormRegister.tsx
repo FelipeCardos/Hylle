@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, Alert} from 'react-native'
+import { View, Text, TouchableOpacity, Alert } from 'react-native'
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import api from '../../../Services/Api';
-import { useRouter} from 'expo-router';
+import { useRouter } from 'expo-router';
 
 
-export default function FormRegister(){
-    const [username,setUsername] = useState('');
-    const [email,setEmail] = useState('');
-    const [firstName,setFirstName] = useState('');
-    const [lastName,setLastName] = useState('');
-    const [password,setPassword] = useState('');
+export default function FormRegister() {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-    async function registerNewUser(data:object){
+    async function registerNewUser(data: object) {
         console.log(data)
-        await api.post('oauth/register', data).then((res)=>{
-            if(res.status === 200){
+        await api.post('oauth/register', data).then((res) => {
+            if (res.status === 200) {
                 console.log('User registered successfully');
                 useRouter().replace('/');
 
@@ -38,12 +38,12 @@ export default function FormRegister(){
             Alert.alert('Please fill in all fields.');
             return;
         }
-    
+
         if (password !== passwordConfirmation) {
             Alert.alert('Passwords do not match.');
             return;
         }
-    
+
         const newUser = {
             username: username,
             email: email,
@@ -53,27 +53,103 @@ export default function FormRegister(){
         };
         registerNewUser(newUser);
     }
-    
 
-    return(
-        <ScrollView>
-            <Text>Username</Text>
-            <TextInput onChangeText={setUsername}></TextInput>
-            <Text>Email</Text>
-            <TextInput onChangeText={setEmail}></TextInput>
-            <Text>First Name</Text>
-            <TextInput onChangeText={setFirstName}></TextInput>
-            <Text>Last Name</Text>
-            <TextInput onChangeText={setLastName}></TextInput>
-            <Text>Password</Text>
-            <TextInput onChangeText={setPassword}></TextInput>
-            <Text>Password Confirmation</Text>
-            <TextInput onChangeText={setPasswordConfirmation}></TextInput>
-            <TouchableOpacity onPress={handleRegister}>
-                <Text>
-                    Submit
-                </Text>
-            </TouchableOpacity>
-        </ScrollView>
+
+    return (
+        <View className="w-3/4
+                        h-3/4
+                        rounded-lg
+                        items-stretch ...">
+            <View>
+                <TextInput onChangeText={setUsername}
+                    placeholder='Username'
+                    className='w-full
+                                       block
+                                       rounded-md
+                                       py-2
+                                       bg-white
+                                       pl-5
+                                       pr-3
+                                       shadow-sm'/>
+            </View>
+            <View>
+                <TextInput onChangeText={setEmail}
+                    placeholder='Email'
+                    className='w-full
+                            block
+                            rounded-md
+                            py-2
+                            bg-white
+                            pl-5
+                            pr-3
+                            shadow-sm
+                            mt-4'/>
+            </View>
+            <TextInput onChangeText={setFirstName}
+                placeholder='First Name'
+                className='w-full
+                            block
+                            rounded-md
+                            py-2
+                            bg-white
+                            pl-5
+                            pr-3
+                            shadow-sm
+                            mt-4'/>
+            <View>
+                <TextInput onChangeText={setLastName}
+                    placeholder='Last Name'
+                    className='w-full
+                            block
+                            rounded-md
+                            py-2
+                            bg-white
+                            pl-5
+                            pr-3
+                            shadow-sm
+                            mt-4'/>
+            </View>
+            <TextInput onChangeText={setPassword}
+                placeholder='Password'
+                className='w-full
+                            block
+                            rounded-md
+                            py-2
+                            bg-white
+                            pl-5
+                            pr-3
+                            shadow-sm
+                            mt-4'/>
+            <View>
+            </View>
+            <TextInput onChangeText={setPasswordConfirmation}
+                placeholder='Password Confirmation'
+                className='w-full
+                            block
+                            rounded-md
+                            py-2
+                            bg-white
+                            pl-5
+                            pr-3
+                            shadow-sm
+                            mt-4'/>
+            <View>
+                <TouchableOpacity onPress={handleRegister}
+                    className='self-end
+                              bg-gold
+                              mt-12
+                              w-full
+                              py-3
+                              rounded-lg'>
+                    <Text className='text-darkBlue
+                                    text-xl
+                                    text-center
+                                    items-center
+                                    justify-center'>
+                        Create
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        </View>
     );
 }

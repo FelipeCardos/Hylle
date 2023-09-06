@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text} from 'react-native';
+import React from 'react';
 import FormRegister from './Components/Register/FormRegister';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Register(){
     return (
-        <View>
+        <SafeAreaView className='bg-mainBlue flex-1 items-center justify-center'>
             <FormRegister/>
-        </View>
+        </SafeAreaView>
     )
 }
