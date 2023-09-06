@@ -7,6 +7,15 @@ module.exports = {
       sans: ['Graphik', 'sans-serif'],
 
     },
+    colors:{
+      'mainBlue':'#3684B2',
+      'gold' : '#CBB26B',
+      'white' : '#ffffff',
+      'lightBlue' : '#0988d0',
+      'darkBlue' : '#05486e',
+      'lightGold' : '#dBc691',
+      'red': 'rgb(220 38 38)'
+    },
     extend: {
       borderRadius: {
         '4xl': '2rem',

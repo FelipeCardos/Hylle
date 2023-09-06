@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, SafeAreaView, TextInput, Alert } from 'react-native';
+import { Text, SafeAreaView, TextInput, Alert, View, Image } from 'react-native';
 import * as WebBrowser from "expo-web-browser";
 import * as Google from 'expo-auth-session/providers/google';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -97,29 +97,85 @@ export default function App() {
     }
   }
   return (
-    <SafeAreaView className="flex-1 items-center justify-center bg-sky-700" >
-      <Text>Username</Text>
+    <SafeAreaView className="flex-1 items-center justify-center bg-mainBlue" >
+      <View>
+        <Image source={require('../assets/logo.jpeg')} />
+      </View>
+      <View className='w-3/4 my-0.5'>
+        {/** INPUT LOGIN AREA */}
       <TextInput
-        placeholder="Username..."
+        placeholder="Username"
         value={username}
         onChangeText={setUsername}
+        className='placeholder:italic 
+                   placeholder:text-slate-400 
+                   block 
+                   bg-white 
+                   w-full 
+                   border 
+                   border-slate-300 
+                   rounded-md 
+                   py-2 
+                   pl-5 
+                   pr-3 
+                   shadow-sm 
+                   focus:outline-none 
+                   focus:from-lightGold 
+                   focus:to-gold 
+                   focus:ring-1 
+                   sm:text-sm"'
       />
-      <Text>Password</Text>
+      </View>
+      <View className='w-3/4 my-0.5'>
       <TextInput
-        placeholder="Password..."
+        placeholder="Password"
         value={password}
         onChangeText={setPassword}
+        className='placeholder:italic 
+                   placeholder:text-slate-400
+                   block
+                  bg-white 
+                   w-full 
+                   border 
+                   border-slate-300
+                   rounded-md 
+                   py-2 
+                   pl-5 
+                   pr-3 
+                   shadow-sm 
+                   focus:outline-none 
+                   focus:from-lightGold 
+                   focus:to-gold 
+                   focus:ring-1 
+                   sm:text-sm"'
       />
-      <TouchableOpacity style={{ backgroundColor: 'gray', borderRadius: 5, width: '100%' }} onPress={() => handleLogin()} >
-        <Text>
+      </View>
+      <View className='w-3/4 mt-3'>
+      <TouchableOpacity onPress={() => handleLogin()}
+                        className='bg-lightGold
+                                   my-05
+                                   w-full
+                                   py-2
+                                   pl-3
+                                   rounded-md'>
+        <Text className='text-darkBlue'>
           Sign in
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity style={{ backgroundColor: 'red', borderRadius: 5 }} onPress={() => promptAsync()}>
-        <Text>
+      </View>
+      <View className='w-3/4 mt-3'>
+      <TouchableOpacity onPress={() => promptAsync()} 
+                        className='bg-red
+                                     my-0.5
+                                     w-full
+                                     py-2
+                                     pl-3
+                                     rounded-md'>
+        <Text className='text-white'>
           Sign in with Google
         </Text>
       </TouchableOpacity>
+      </View>
         <Link href={'/Register'} asChild>
           <TouchableOpacity >
             <Text>
