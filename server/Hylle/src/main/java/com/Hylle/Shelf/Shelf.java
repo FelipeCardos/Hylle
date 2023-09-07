@@ -1,6 +1,7 @@
 package com.Hylle.Shelf;
 
 import com.Hylle.User.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -18,10 +19,11 @@ import java.util.Date;
 public class Shelf {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "idShelf")
+    @Column(name = "id_shelf")
     private int id;
     private String title;
     private Date creationTime;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "User_id")
     private User user;

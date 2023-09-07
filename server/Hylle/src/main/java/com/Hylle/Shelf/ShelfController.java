@@ -28,14 +28,6 @@ public class ShelfController {
         return ResponseEntity.ok(shelf);
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<?> getShelvesByUserId(@PathVariable int userId){
-        List<Shelf> shelves = shelfRepository.findShelvesByUserId(userId);
-        if(shelves == null)
-            return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(shelves);
-    }
-
     @PostMapping("/new")
     public ResponseEntity registerShelf(@RequestBody @Valid ShelfDTO shelf, @RequestParam("userId") int userId){
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

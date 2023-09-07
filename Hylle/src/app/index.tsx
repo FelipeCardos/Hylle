@@ -57,7 +57,7 @@ export default function App() {
       const user = await res.json();
       await AsyncStorage.setItem("@user", JSON.stringify(user));
       setUserInfo(user);
-      useRouter().replace('/(tabs)');
+      useRouter().replace('/(tabs)/');
     } catch (error) {
       // Tratar erros de requisição
       console.error("Erro ao obter informações do usuário:", error);
@@ -79,7 +79,7 @@ export default function App() {
         const responseData = response.data;
         console.log("Login successful:", responseData);
         // Após receber o token JWT, guardo token no armazenamento interno do dispositivo
-        await AsyncStorage.setItem('@token', JSON.stringify(responseData.token))
+        await AsyncStorage.setItem('@token', responseData.token)
         // Guardo informações do utilizador
         await AsyncStorage.setItem('@user', JSON.stringify(responseData.user));
 
