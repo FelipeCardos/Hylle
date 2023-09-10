@@ -1,5 +1,6 @@
 import { Tabs } from "expo-router";
 import { MaterialCommunityIcons, FontAwesome, Ionicons, AntDesign  } from '@expo/vector-icons';
+import AddShelf from "../Components/Shelves/AddShelf";
 
 export default function TabRoutesLayout() {
   return(
@@ -15,7 +16,10 @@ export default function TabRoutesLayout() {
         name="Shelves"
         options={{
           title: "Shelves",
-          tabBarIcon: ({ size, color }) => <MaterialCommunityIcons name="bookshelf" size={size} color={color}/>
+          tabBarIcon: ({ size, color }) => <MaterialCommunityIcons name="bookshelf" size={size} color={color}/>,
+          headerRight:()=>(
+            <AddShelf/>
+          )
         }}
       />
       <Tabs.Screen
