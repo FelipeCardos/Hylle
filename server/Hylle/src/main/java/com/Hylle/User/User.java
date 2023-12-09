@@ -25,15 +25,23 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_user")
     private int id;
+    @Column(name = "username")
     private String username;
+    @Column(name = "email")
     private String email;
+    @Column(name = "password")
     private String password;
+    @Column(name = "status")
     private Status status;
+    @Column(name = "role")
     private Role role;
+    @Column(name = "firstName")
     private String firstName;
+    @Column(name = "lastName")
     private String lastName;
     @OneToMany(mappedBy = "user")
     private List<Shelf> shelves = new ArrayList<>();
+    @Column(name = "profilePic")
     private String profilePic;
 
     public User(String username, String email, String password, Status status, Role role, String firstName, String lastName, String profilePic) {

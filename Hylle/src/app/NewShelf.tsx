@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import CreateShelf from "./Components/Shelves/CreateShelf";
 import {GradientView} from "./Components/Shelves/ShelvesStyles";
 
