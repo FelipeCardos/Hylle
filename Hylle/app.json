@@ -11,15 +11,21 @@
     "name": "Hylle",
     "slug": "Hylle",
     "plugins": [
-      "expo-router",
-      ["@react-native-google-signin/google-signin"]
+      "expo-router"
     ],
     "android": {
-      "package": "com.felipech.Hylle",
-      "googleServicesFile": "./google-services.json"
+      "package": "com.felipech.Hylle"
     },
-    "ios":{
-      "supportsTablet":true
+    "ios": {
+      "supportsTablet": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "355680fa-eb1a-4821-a059-b6dc4d3abfdb"
+      }
     }
   }
 }

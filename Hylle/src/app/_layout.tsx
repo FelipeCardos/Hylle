@@ -8,6 +8,8 @@ export default function StackLayout(){
         <Stack.Screen name="index" options={{headerShown: false}} />
         <Stack.Screen name="Register" options={{headerTitle:'Register', headerShown:true}}/>
         <Stack.Screen name="NewShelf" options={{headerTitle:'Create Shelf', headerShown:false}}/>
+        <Stack.Screen name="SearchShelf" options={{headerTitle:'', headerShown:false}}/>
+        <Stack.Screen name="Books/[id,title]" options={{headerTitle:'', headerShown:true}} />
     </Stack>
     )
 }

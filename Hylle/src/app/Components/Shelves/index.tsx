@@ -1,17 +1,18 @@
 import api from "@/Services/Api";
+import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useEffect, useState } from "react";
-import { View, Text, FlatList } from "react-native";
-import { styles, GradientView } from "./ShelvesStyles";
+import { View, Text, FlatList, RefreshControl, Image } from "react-native";
+import { styles } from "./ShelvesStyles";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Link, router } from "expo-router";
 
 interface Shelf {
-  id_shelf: string;
-  User_id: string;
+  id: string;
   title: string;
-  creation_time: string;
+  creationTime: string;
 }
 
-export default function ShelfFeed() {
+const ShelfFeed = () => {
   const [shelves, setShelves] = useState<Shelf[]>([]);
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
@@ -31,38 +32,60 @@ export default function ShelfFeed() {
 
       const response = await api.get(`/user/${user.id}/shelves`);
       setShelves(response.data);
+      await AsyncStorage.setItem("@userShelves", JSON.stringify(response.data));
     } catch (error) {
       console.error("Erro ao buscar prateleiras:", error);
     } finally {
+      console.log(shelves);
       setRefreshing(false);
     }
   };
 
   useEffect(() => {
-    getShelves(); // Chame getShelves() diretamente aqui para buscar os dados quando o componente é montado
+    getShelves();
   }, []);
 
   const handleRefresh = () => {
     getShelves();
   };
 
+  const renderItem = ({ item }: { item: Shelf }) => (
+    <View style={styles.ShelfListItem}>
+        <TouchableOpacity onPress={()=>{
+          router.push({
+            pathname:"/Books/[id,title]",
+            params:{id:item.id, title:item.title},
+          })
+        }}>
+          <View>
+            <Image
+              source={require('assets/shelfImage.jpg')}
+              style={styles.image}
+              resizeMode="contain"
+            />
+            <Text>{item.title}</Text>
+            <Text>{item.id}</Text>
+          </View>
+        </TouchableOpacity>
+    </View>
+  );
+
   return (
-    <View style={styles.FeedShelves}>
+    <View style={styles.ShelfListContainer}>
       <FlatList
         data={shelves}
-        renderItem={({ item }) => {
-          return (
-              <GradientView colors={["#ffffff","#dBc691","#CBB26B"]}>
-            <View style={styles.ShelfFromFeed}>
-                <Text>{item.title}</Text>
-            </View>
-              </GradientView>
-          );
-        }}
-        keyExtractor={(item, index) => index.toString()}
-        refreshing={refreshing}
-        onRefresh={handleRefresh}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        numColumns={2}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={handleRefresh}
+          />
+        }
       />
     </View>
   );
-}
+};
+
+export default ShelfFeed;
