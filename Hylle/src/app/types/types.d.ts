@@ -16,7 +16,10 @@ declare global{
         title: string;
         creationTime: string;
       }
-      
+
+      interface Book{
+        [key:string]:any;
+      }
       export default User;
       
-}
+    }

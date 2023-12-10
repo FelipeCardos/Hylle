@@ -25,6 +25,6 @@ api.interceptors.request.use(async (config) => {
 export const API_GOOGLE_BOOKS_KEY = 'AIzaSyC4Q4_yiJPgDxY7jXjHlvL8fYAQIZMOevk';
 export const GOOGLE_BOOKS_URL = 'https://www.googleapis.com/books';
 export const GET_GOOGLE_BOOKS_BY_NAME_ENDPOINT = '/v1/volumes?q=';
-export const GOOGLE_BOOKS_KEY_HEADER = '&key'+ API_GOOGLE_BOOKS_KEY;
+export const GOOGLE_BOOKS_KEY_HEADER = '&key='+ API_GOOGLE_BOOKS_KEY;
 
 export default api;
